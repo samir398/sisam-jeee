@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For sisam jee 💖</title>
+<style>
+html, body {
+  margin:0; padding:0; width:100%; height:100%;
+  overflow:hidden; font-family:'Segoe UI',sans-serif; background:#000;
+}
+.page{
+  display:none; flex-direction:column; justify-content:center; align-items:center;
+  width:100%; height:100%; position:absolute; overflow:hidden;
+}
+button{
+  padding:15px 30px;border:none;border-radius:30px;
+  background:#ff2e7a;color:white;font-size:18px;cursor:pointer;margin:10px;
+  box-shadow:0 0 15px pink;transition:0.3s;
+}
+button:hover{transform:scale(1.08);}
+.ring{font-size:60px;animation:float 3s infinite alternate;}
+@keyframes float{from{transform:translateY(-10px)}to{transform:translateY(10px)}}
+.forever{font-size:28px;letter-spacing:3px;margin:10px 0;animation:glowText 2s infinite alternate;}
+@keyframes glowText{from{text-shadow:0 0 10px pink;}to{text-shadow:0 0 30px white;}}
+
+/* Slide 1 */
+#page1{background:linear-gradient(135deg,#ffb6d9,#ff8fc4,#ff5fa2);}
+#page1 h1{font-size:48px;text-shadow:0 0 20px #fff,0 0 40px #ff69b4;}
+#page1 p{font-size:20px;margin:10px;}
+
+/* Slide 2 scrollable */
+#page2{
+  background:linear-gradient(135deg,#ffe0f0,#ffb3d9,#ff8fc4);
+  overflow-y:auto;padding:20px 0; position:relative;
+}
+#page2 h1{font-size:42px;text-shadow:0 0 15px #fff,0 0 30px #ff69b4;margin-bottom:20px;}
+#page2 video{
+  border-radius:25px; box-shadow:0 0 25px #ff69b4,0 0 40px #ffb6d9;
+  max-height:50vh; max-width:90vw; object-fit:cover; margin:10px;
+}
+/* Next button on right side middle */
+.next-btn{
+  position:absolute; top:50%; right:10px; transform:translateY(-50%); z-index:10;
+}
+.heart{position:absolute;font-size:20px;animation:heartFly linear forwards;opacity:0.8;}
+@keyframes heartFly{0%{transform:translateY(100vh) scale(0.5);opacity:0;}50%{opacity:1;}100%{transform:translateY(-20vh) scale(1);opacity:0;}}
+
+/* Slide 3 */
+#page3{background:linear-gradient(#ff9ecb,#ff6fa5);}
+#page3 h2{font-size:28px;margin:20px 0;}
+.no{position:absolute;background:#ff85b3;}
+
+/* FLOWERS, BUTTERFLIES, SPARKLES */
+.rose{position:absolute;font-size:22px;animation:fall 6s linear;}
+@keyframes fall{from{transform:translateY(-10vh)}to{transform:translateY(100vh)}}
+.butterfly{position:absolute;font-size:22px;animation:fly 10s linear;}
+@keyframes fly{from{transform:translateY(100vh)}to{transform:translateY(-10vh)}}
+.firework{position:absolute;font-size:22px;animation:explode 1s forwards;}
+@keyframes explode{0%{transform:scale(0)}100%{transform:scale(3);opacity:0}}
+.sparkle{position:absolute;width:4px;height:4px;background:white;border-radius:50%;animation:sparkleMove 5s linear infinite;}
+@keyframes sparkleMove{0%{transform:translateY(100vh)}100%{transform:translateY(-10vh);opacity:0}}
+</style>
+</head>
+<body>
+
+<div id="page1" class="page">
+  <div class="ring">💍</div>
+  <div class="forever">FOREVER sisam jee </div>
+  <h1>sisam jee  💖</h1>
+  <p>You are my favorite person ✨</p>
+  <button onclick="nextPage(2)">Click For Surprise 🎁</button>
+</div>
+
+<div id="page2" class="page">
+  <h1>sisam jee , This is For You 💗</h1>
+  <video controls><source src="IMG_3091 (1).MOV" type="video/mp4"></video>
+  <button class="next-btn" onclick="nextPage(3)">Next ➡️</button>
+</div>
+
+<div id="page3" class="page">
+  <h1>Sisam jee 💖</h1>
+  <h2>Forever be my girl 💍</h2>
+  <button onclick="swapSlides()">Yes 💘</button>
+  <button class="no" onmouseover="moveNo()">No 🙈</button>
+</div>
+
+<audio id="music" loop autoplay><source src="music.1.m4a"></audio>
+
+<script>
+let heartsInterval=null;
+
+// Show first page
+window.onload=function(){
+  document.getElementById("page1").style.display="flex";
+  document.getElementById("music").play().catch(()=>{});
+}
+
+// Navigation
+function nextPage(page){
+  document.querySelectorAll(".page").forEach(p=>p.style.display="none");
+  document.getElementById("page"+page).style.display="flex";
+  if(page===2) createHearts();
+  if(page===3) fireworks();
+}
+
+// Swap Slide 2 and Slide 3
+function swapSlides(){
+  let page2=document.getElementById("page2");
+  let page3=document.getElementById("page3");
+  let tempHTML=page2.innerHTML;
+  page2.innerHTML=page3.innerHTML;
+  page3.innerHTML=tempHTML;
+  document.querySelectorAll(".page").forEach(p=>p.style.display="none");
+  page3.style.display="flex"; // show slide 3 (which now has original slide 2)
+  fireworks();
+}
+
+// Hearts
+function createHearts(){
+  heartsInterval=setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart"; h.innerHTML="💖";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  },400);
+}
+
+// Move No button
+function moveNo(){
+  let btn=document.querySelector(".no");
+  btn.style.left=Math.random()*70+"vw";
+  btn.style.top=Math.random()*70+"vh";
+}
+
+// Fireworks
+function fireworks(){
+  for(let i=0;i<20;i++){
+    setTimeout(()=>{
+      let f=document.createElement("div");
+      f.className="firework";
+      f.innerHTML="💖";
+      f.style.left=Math.random()*100+"vw";
+      f.style.top=Math.random()*80+"vh";
+      document.body.appendChild(f);
+      setTimeout(()=>f.remove(),1000);
+    },i*150);
+  }
+}
+
+// Sparkles, Roses, Butterflies
+setInterval(()=>{
+  let s=document.createElement("div"); 
+  s.className="sparkle"; 
+  s.style.left=Math.random()*100+"vw"; 
+  document.body.appendChild(s); 
+  setTimeout(()=>s.remove(),5000);
+},200);
+setInterval(()=>{
+  let r=document.createElement("div"); 
+  r.className="rose"; 
+  r.innerHTML="🌹"; 
+  r.style.left=Math.random()*100+"vw"; 
+  document.body.appendChild(r); 
+  setTimeout(()=>r.remove(),6000);
+},500);
+setInterval(()=>{
+  let b=document.createElement("div"); 
+  b.className="butterfly"; 
+  b.innerHTML="🦋"; 
+  b.style.left=Math.random()*100+"vw"; 
+  document.body.appendChild(b); 
+  setTimeout(()=>b.remove(),10000);
+},2500);
+</script>
+</body>
+</html>
